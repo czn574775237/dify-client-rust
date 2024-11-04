@@ -18,9 +18,8 @@ dify-client-rust = { git ="https://github.com/czn574775237/dify-client-rust.git"
 #[tokio::test]
 async fn test_streaming_chat() {
     use futures_util::StreamExt;
-    init_tracing_subscriber();
-
-    let client = ChatClient::from(get_client());
+    
+    let client = ChatClient::new("api_key", Some(""));
     let result = client
         .create_chat_message(
             json!({}),
@@ -51,9 +50,8 @@ use dify_client_rust::{ChatClient, DifyClient, ResponseMode};
 
 #[tokio::test]
 async fn test_blocking_chat() {
-    init_tracing_subscriber();
-
-    let client = ChatClient::from(get_client());
+    
+    let client = ChatClient::new("api_key", Some(""));
     let result = client
         .create_chat_message(json!({}), "hi", "zhining", ResponseMode::Block, None, None)
         .await
